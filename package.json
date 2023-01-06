@@ -1,0 +1,33 @@
+{
+  "name": "@olympeio-extensions/rabbitmq",
+  "main": "src/main.js",
+  "version": "0.0.1-dev",
+  "scripts": {
+    "prebuild": "npx gulp patches --core.modules=project",
+    "build": "webpack build",
+    "postbuild": "npx gulp clean",
+    "test": "karma start"
+  },
+  "devDependencies": {
+    "@olympeio/dev-tools": "2.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^7.0.0",
+    "generate-json-webpack-plugin": "^2.0.0",
+    "jasmine": "^3.7.0",
+    "karma-jasmine": "^4.0.1",
+    "karma-webpack": "^5.0.0",
+    "source-map-loader": "^2.0.1",
+    "webpack": "^5.28.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-import-glob-loader": "^1.6.3",
+    "webpack-karma-jasmine": "^4.0.0",
+    "webpack-merge": "^5.7.3",
+    "webpack-node-externals": "^2.5.0"
+  },
+  "dependencies": {
+    "@olympeio/core": "dev",
+    "@olympeio/runtime-web": "9.1.2",
+    "@olympeio/runtime-node": "9.1.2"
+  }
+}
