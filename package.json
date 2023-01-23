@@ -1,7 +1,7 @@
 {
   "name": "@olympeio-extensions/rabbitmq",
   "main": "src/main.js",
-  "version": "2.3.3-dev",
+  "version": "2.3.4-dev",
   "scripts": {
     "prebuild": "npx gulp patches --core.modules=project",
     "build": "webpack build",
