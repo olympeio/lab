@@ -27,7 +27,8 @@
   },
   "dependencies": {
     "@olympeio/core": "dev",
-    "@olympeio/runtime-web": "~9.0.0",
-    "@olympeio/runtime-node": "~9.0.0"
+    "@olympeio/runtime-web": "~9.3.0",
+    "@olympeio/runtime-node": "~9.3.0",
+    "amqplib": "0.10.3"
   }
 }
