@@ -26,8 +26,9 @@
     "webpack-node-externals": "^2.5.0"
   },
   "dependencies": {
-    "@olympeio/core": "upgrade",
-    "@olympeio/runtime-web": "dev",
-    "@olympeio/runtime-node": "~9.0.0"
+    "@olympeio/core": "dev",
+    "@olympeio/runtime-web": "~9.3.0",
+    "@olympeio/runtime-node": "~9.3.0",
+    "amqplib": "0.10.3"
   }
 }
