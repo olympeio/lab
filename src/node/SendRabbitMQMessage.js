@@ -29,11 +29,12 @@ export default class SendRabbitMQMessage extends ActionBrick {
             setError(ErrorFlow.create(errorMsg, 0));
             return;
         }
-        getChannel(configIdentifier).then(channel => {
-            logger.info("Send rabbitmq message to queue:", queue);
-            channel.sendToQueue(queue, Buffer.from(message), { persistent });
-            forwardEvent();
-        })
+        getChannel(configIdentifier)
+            .then(channel => {
+                logger.info("Send rabbitmq message to queue:", queue);
+                channel.sendToQueue(queue, Buffer.from(message), { persistent });
+                forwardEvent();
+            })
             .catch(err => {
                 setError(ErrorFlow.create(err.message, 0));
             })

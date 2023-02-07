@@ -23,25 +23,24 @@ export default class OnRabbitMQMessageReceived extends Brick {
             setError(ErrorFlow.create(errorMsg, 0));
             return;
         }
-        getChannel(configIdentifier).then(channel => {
-            logger.info("Listen message on rabbitmq queue", queue);
-            channel.consume(queue, (msg) => {
-                if (!msg) {
-                    logger.info("Rabbitmq queue is closed");
-                    setMessage(null);
-                    return;
-                }
-                const text = msg.content.toString();
-                logger.info("Rabbitmq receive message:", text);
-                setMessage(text);
-                if (!noAck) channel.ack(msg);
-            }, {
-                noAck
-            });
-            setQueue(queue);
-        })
+        getChannel(configIdentifier)
+            .then(channel => {
+                logger.info("Listen message on rabbitmq queue", queue);
+                channel.consume(queue, (msg) => {
+                    if (!msg) {
+                        logger.info("Rabbitmq queue is closed");
+                        setMessage(null);
+                        return;
+                    }
+                    const text = msg.content.toString();
+                    logger.info("Rabbitmq receive message:", text);
+                    setMessage(text);
+                    if (!noAck) channel.ack(msg);
+                }, { noAck });
+                setQueue(queue);
+            })
             .catch(err => {
-                setError(setError(ErrorFlow.create(err.message, 0)));
+                setError(ErrorFlow.create(err.message, 1));
             });
 
 
