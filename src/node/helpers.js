@@ -147,23 +147,23 @@ export const getChannel = (configIdentifier) => {
         let channel = rabbitMQHelper().getChannelByKey(configIdentifier);
         if (channel) {
             return resolve(channel);
-        }
-        try {
-            const connection = await getConnection(configIdentifier);
-            if (!connection) {
-                return reject();
-            }
-            connection.createChannel(function (err, channel) {
-                if (err) {
-                    return reject(Error("Faile do create rabbitmq channel"));
+        } else {
+            try {
+                const connection = await getConnection(configIdentifier);
+                if (!connection) {
+                    return reject();
                 }
-                channel.prefetch(1); // not to give more than one message to a worker at a time
-                rabbitMQHelper().setChannel(configIdentifier, channel);
-                resolve(channel);
-            });
-        }
-        catch (err) {
-            return reject(Error('Faile do create rabbitmq channel'));
+                connection.createChannel(function (err, channel) {
+                    if (err) {
+                        return reject(Error("Failed to create rabbitmq channel"));
+                    }
+                    channel.prefetch(1); // not to give more than one message to a worker at a time
+                    rabbitMQHelper().setChannel(configIdentifier, channel);
+                    resolve(channel);
+                });
+            } catch (err) {
+                return reject(Error('Faile do create rabbitmq channel'));
+            }
         }
     })
 }
