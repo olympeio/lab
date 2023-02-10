@@ -1,5 +1,5 @@
 import amqp from 'amqplib/callback_api';
-import { Config, Process } from 'olympe';
+import { Config, Process, ErrorFlow } from 'olympe';
 
 class RabbitMQHelper {
     /**
