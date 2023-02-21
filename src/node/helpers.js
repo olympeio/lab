@@ -162,7 +162,7 @@ export const getChannel = (configIdentifier) => {
                     resolve(channel);
                 });
             } catch (err) {
-                return reject(Error('Faile do create rabbitmq channel'));
+                return reject(Error('Failed to create rabbitmq channel'));
             }
         }
     })
