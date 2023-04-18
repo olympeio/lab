@@ -28,7 +28,7 @@
     "karma-spec-reporter": "0.0.36"
   },
   "dependencies": {
-    "@olympeio/core": "upgrade",
+    "@olympeio/core": "dev",
     "@olympeio/runtime-web": "dev",
     "@olympeio/runtime-node": "dev",
     "amqplib": "0.10.3"
