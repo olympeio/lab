@@ -1,7 +1,7 @@
 {
   "name": "@olympeio-extensions/rabbitmq",
   "main": "src/main.js",
-  "version": "2.3.8-dev",
+  "version": "2.4.1-dev",
   "scripts": {
     "prebuild": "npx gulp patches --core.modules=project",
     "build": "webpack build",
@@ -9,7 +9,7 @@
     "test": "karma start"
   },
   "devDependencies": {
-    "@olympeio/dev-tools": "dev",
+    "@olympeio/dev-tools": "~2.4.0",
     "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "11.0.0",
     "generate-json-webpack-plugin": "2.0.0",
@@ -29,8 +29,8 @@
   },
   "dependencies": {
     "@olympeio/core": "dev",
-    "@olympeio/runtime-web": "dev",
-    "@olympeio/runtime-node": "dev",
+    "@olympeio/runtime-web": "~9.4.0",
+    "@olympeio/runtime-node": "~9.4.0",
     "amqplib": "0.10.3"
   }
 }
