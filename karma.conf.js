@@ -44,7 +44,7 @@ module.exports = function (config) {
     //list of browsers to launch and capture
     browsers: ['CustomChromeHeadless', /*'Chrome','PhantomJS','Firefox','Edge','ChromeCanary','Opera','IE','Safari'*/],
     //list of reporters to use
-    reporters: ['mocha', 'kjhtml'/*,'dots','progress','spec'*/],
+    reporters: ['spec'/*'mocha','kjhtml','dots','progress','spec'*/],
 
     //address that the server will listen on, '0.0.0.0' is default
     listenAddress: '0.0.0.0',
@@ -76,23 +76,7 @@ module.exports = function (config) {
       }
     },
 
-    /* karma-webpack config
-       pass your webpack configuration for karma
-       add `babel-loader` to the webpack configuration
-       to make the ES6+ code readable by the browser */
     webpack: {
-      module: {
-        rules: [
-          {
-            test: /\.js$/i,
-            exclude: /(node_modules)/,
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env']
-            }
-          }
-        ]
-      },
       resolve: {
         alias: {
           olympe: runtimeWebPath
