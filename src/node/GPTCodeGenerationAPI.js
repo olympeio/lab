@@ -29,13 +29,13 @@ export default class GPTCodeGenerationAPI extends ActionBrick {
             max_tokens: 100,
             temperature: 0
         });
-        setBodyCode(answer.data.choices[0].text);
+        setBodyCode(answer.data.choices[0].text.replace(/^\n+/, ''));
         forwardEvent();
     }
 
 
     createPrompt(shortDescription, longDescription, inputs, outputs) {
-        const start = 'You are a code assistant and give me only the body of a javascript function matching the behavior I describe.';
+        const start = 'You are a code assistant and give me only the body of a javascript function matching the behavior I describe. You do not, ever, give me the function signature. All lignes should be an assignment or a function call.';
         const brickDescription = `The task the code should execute is: \"${shortDescription}\". Here are more details about this task: \"${longDescription}\".`;
         const inputsPrompt = this.createInputsPrompt(inputs);
         const outputsPrompt = this.createOutputsPrompt(outputs);
@@ -58,7 +58,7 @@ export default class GPTCodeGenerationAPI extends ActionBrick {
      * @param {Map <string, string>} inputs
      */
     createOutputsPrompt(outputs){
-        const start = 'You do not return anything. At the end of the body, you call the following functions with the output matching the description:\n';
+        const start = 'You do not return anything. To return the result(s), you call the following functions at the end of the body. The only argument to these functions is one of the output matching the description:\n';
         let outputsDescription =  '';
         for (const [outputFunctionName, outputDescription] of this.getReturnFunctionsName(outputs)) {
             outputsDescription += `- \"${outputFunctionName}\", whose description is: \"${outputDescription}\".\n`;
