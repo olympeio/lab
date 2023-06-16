@@ -30,7 +30,7 @@ export default class Gesture extends CloudObject {
     }
 
     /**
-     * @return {!QueryResult<Direction>}
+     * @return {!QueryResult<DirectionModel>}
      */
     getDirections() {
         return this.follow(Gesture.directionsRel).executeFromCache();
