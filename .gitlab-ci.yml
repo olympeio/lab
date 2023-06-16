@@ -1,4 +1,0 @@
-include:
-  - project: olympeio/extensions/npm-registry
-    file: extensions.gitlab-ci.yml
-    ref: master
