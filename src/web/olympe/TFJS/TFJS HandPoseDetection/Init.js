@@ -1,16 +1,19 @@
 import { Brick, registerBrick } from 'olympe';
-import * as fingerPose from '@tensorflow-models/hand-pose-detection';
+import * as handPoseDetection from '@tensorflow-models/hand-pose-detection';
 
-export default class HandPoseTFAI extends Brick {
+
+
+export default class HandPoseDetection extends Brick {
 
     /**
      * @override
      * @protected
      * @param {!BrickContext} $
-     * @param {string} cameraSource
-     * @param {!Array} outputs
+     * @param {*} cameraSource
+     * @param {function(*)} setHands
      */
-    async update($, [cameraSource], outputs) {
+     async update($, [cameraSource], [setHands]) {
+
         const video = document.createElement('video');
         video.setAttribute('width', 640);
         video.setAttribute('height', 480);
@@ -52,4 +55,4 @@ export default class HandPoseTFAI extends Brick {
     }
 }
 
-registerBrick('0188c33ea7a3f5c95589', HandPoseTFAI);
+registerBrick('01839233e98e2ceb7c20', HandPoseDetection);
