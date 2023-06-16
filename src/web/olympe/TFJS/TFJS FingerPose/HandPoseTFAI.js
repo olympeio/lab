@@ -1,4 +1,5 @@
 import { Brick, registerBrick } from 'olympe';
+import * as fingerPose from '@tensorflow-models/hand-pose-detection';
 
 export default class HandPoseTFAI extends Brick {
 
