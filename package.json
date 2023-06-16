@@ -32,10 +32,10 @@
     "karma-spec-reporter": "0.0.36"
   },
   "dependencies": {
-    "@olympeio/core": "2.4.1",
-    "@olympeio/commons": "2.4.1",
     "@olympeio/runtime-web": "9.4.2",
     "@olympeio/runtime-node": "9.4.2",
+    "@olympeio/core": "2.4.1",
+    "@olympeio-extensions/commons": "2.4.1",
     "@tensorflow-models/hand-pose-detection": "2.0.0",
     "@tensorflow/tfjs": "^3.9.0",
     "@tensorflow/tfjs-backend-webgl": "^3.9.0",
