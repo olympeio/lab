@@ -2,12 +2,11 @@ const path = require('path');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const Copy = require('copy-webpack-plugin');
 const GenerateJsonPlugin = require('generate-json-webpack-plugin');
-const nodeExternals = require('webpack-node-externals');
 const {merge} = require('webpack-merge');
 
 const dist = path.join(__dirname, 'dist');
 const npmPackage = require('./package.json');
-const runtimeWebPath = path.resolve(__dirname, 'node_modules/@olympeio/runtime-web');
+const drawPath = path.resolve(__dirname, 'node_modules/@olympeio/draw');
 
 const commonConfig = {
     output: {
@@ -20,28 +19,24 @@ const commonConfig = {
     devtool: 'source-map',
     resolve: {
         alias: {
-            olympe: runtimeWebPath
+            olympe: drawPath
         }
     },
     module: {
         rules: [
-            {
-                test: /\.js$/,
-                enforce: "pre",
-                use: "source-map-loader"
-            },
-            {
-                test: /\.js$/,
-                exclude: [
-                    /\.spec\.mjs$/,
-                    /^tests\//
-                ],
-                enforce: "pre",
-                use: "webpack-import-glob-loader"
-            },
+            {test: /\.js$/, enforce: "pre", use: "source-map-loader"},
+            {test: /\.js$/, enforce: "pre", use: "webpack-import-glob-loader"},
+            {test: /\.css$/, use: ["style-loader", "css-loader"]},
         ]
     },
-    externals: ['olympe', nodeExternals()]
+    plugins: [
+        new CleanWebpackPlugin(),
+        new Copy({patterns: [
+            {from: 'res'},
+            {from: drawPath + '/version.json', to: 'version.json'}
+        ]})
+    ],
+    ignoreWarnings: [{message: /Empty results for "import '\.\/bricks\/\*\*\/\*\.js'"/}]
 }
 
 const plugins = {
@@ -68,6 +63,42 @@ const plugins = {
     ]
 };
 
+const server = {
+    devServer: {
+        port: 8888,
+        client: {
+            overlay: {
+                warnings: false
+            }
+        },
+        static: {
+            directory: path.join(__dirname, 'dist/server')
+        },
+        devMiddleware: {
+            writeToDisk: true
+        }
+    }
+};
+
+const draw = {
+    name: 'draw',
+    output: {path: path.join(__dirname, 'dist/draw'), globalObject: 'this'},
+    entry: "./src/main-web.js",
+    resolve: {
+        alias: {olympe: drawPath}
+    },
+    plugins: [
+        new Copy({patterns: [
+            {from: drawPath + '/index.html', to: 'index.html'},
+            {from: drawPath + '/images', to: 'images'},
+            {from: drawPath + '/fonts', to: 'fonts'},
+            {from: drawPath + '/css', to: 'css'},
+            {from: drawPath + '/doc', to: 'doc'},
+            {from: drawPath + '/maintenance', to: 'maintenance'},
+        ]})
+    ]
+};
+
 const node = {
     name: 'node',
     target: 'node',
@@ -76,11 +107,4 @@ const node = {
     externals: ['os']
 };
 
-const web = {
-    name: 'web',
-    entry: './src/main-web.js',
-    output: { filename: 'main-web.js' },
-};
-
-
-module.exports = [merge(commonConfig, node, plugins), merge(commonConfig, web)];
+module.exports = [merge(commonConfig, node, plugins), merge(commonConfig, server, draw)];

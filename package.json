@@ -6,10 +6,14 @@
     "prebuild": "npx gulp patches --core.modules=project",
     "build": "webpack build",
     "postbuild": "npx gulp clean",
-    "test": "karma start"
+    "test": "karma start",
+    "serve:draw": "npx webpack serve --config-name draw",
+    "serve:node": "cd dist/node && node main.js",
+    "serve": "npm run serve:draw"
   },
   "devDependencies": {
-    "@olympeio/dev-tools": "~2.4.0",
+    "@olympeio/dev-tools": "2.4.0",
+    "@olympeio/draw": "2.4.3",
     "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "11.0.0",
     "generate-json-webpack-plugin": "2.0.0",
@@ -28,9 +32,12 @@
     "karma-spec-reporter": "0.0.36"
   },
   "dependencies": {
-    "@olympeio/core": "dev",
-    "@olympeio/runtime-web": "~9.4.1",
-    "@olympeio/runtime-node": "~9.4.1",
-    "amqplib": "0.10.3"
+    "@olympeio/core": "2.4.1",
+    "@olympeio/runtime-web": "9.4.2",
+    "@olympeio/runtime-node": "9.4.2",
+    "@tensorflow-models/hand-pose-detection": "2.0.0",
+    "@tensorflow/tfjs": "^3.9.0",
+    "@tensorflow/tfjs-backend-webgl": "^3.9.0",
+    "@tensorflow/tfjs-core": "^3.9.0"
   }
 }
