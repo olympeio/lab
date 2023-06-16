@@ -40,6 +40,10 @@
     "@tensorflow/tfjs-backend-webgl": "^3.9.0",
     "@tensorflow/tfjs-core": "^3.9.0",
     "fingerpose": "^0.1.0",
-    "openai": "^3.3.0"
+    "d3": "7.4.2",
+    "mathjs": "11.5.1",
+    "openai": "^3.3.0",
+    "three": "0.149.0",
+    "tone": "^14.7.77"
   }
 }
