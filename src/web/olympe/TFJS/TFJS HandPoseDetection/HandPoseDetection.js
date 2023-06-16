@@ -24,8 +24,8 @@ export default class HandPoseDetection extends Brick {
                 'audio': false,
                 'video': {
                     facingMode: 'user',
-                    'width': 640,
-                    'height': 480
+                    'width': 1920,
+                    'height': 1080
                     
                 }
             }
