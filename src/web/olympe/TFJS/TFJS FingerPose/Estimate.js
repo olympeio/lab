@@ -18,7 +18,7 @@ export default class Estimate extends Brick {
                 handGesture.addCurl(Number.parseInt(curl.getFinger()), curl.getCurlValue());
             });
             gesture.getDirections().forEach((direction) => {
-                handGesture.addCurl(Number.parseInt(direction.getFinger()), direction.getDirectionValue());
+                handGesture.addDirection(Number.parseInt(direction.getFinger()), direction.getDirectionValue());
             });
             return handGesture;
         });
