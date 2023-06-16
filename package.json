@@ -17,19 +17,19 @@
     "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "11.0.0",
     "generate-json-webpack-plugin": "2.0.0",
+    "jasmine": "4.5.0",
+    "karma": "6.4.1",
+    "karma-chrome-launcher": "3.1.1",
+    "karma-jasmine": "5.1.0",
+    "karma-spec-reporter": "0.0.36",
+    "karma-webpack": "5.0.0",
     "source-map-loader": "4.0.1",
     "webpack": "5.76.2",
     "webpack-cli": "5.0.1",
     "webpack-dev-server": "4.13.1",
     "webpack-import-glob-loader": "1.6.3",
     "webpack-merge": "5.8.0",
-    "webpack-node-externals": "3.0.0",
-    "jasmine": "4.5.0",
-    "karma-jasmine": "5.1.0",
-    "karma-webpack": "5.0.0",
-    "karma": "6.4.1",
-    "karma-chrome-launcher": "3.1.1",
-    "karma-spec-reporter": "0.0.36"
+    "webpack-node-externals": "3.0.0"
   },
   "dependencies": {
     "@olympeio/runtime-web": "9.4.2",
@@ -39,6 +39,7 @@
     "@tensorflow-models/hand-pose-detection": "2.0.0",
     "@tensorflow/tfjs": "^3.9.0",
     "@tensorflow/tfjs-backend-webgl": "^3.9.0",
-    "@tensorflow/tfjs-core": "^3.9.0"
+    "@tensorflow/tfjs-core": "^3.9.0",
+    "fingerpose": "^0.1.0"
   }
 }

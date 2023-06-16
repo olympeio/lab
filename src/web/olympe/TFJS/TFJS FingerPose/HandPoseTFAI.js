@@ -9,9 +9,45 @@ export default class HandPoseTFAI extends Brick {
      * @param {string} cameraSource
      * @param {!Array} outputs
      */
-    update($, [cameraSource], outputs) {
-        // Write your code here. You have to implement this method !
-        // Executed every time an input gets updated., override `setupExecution()` to change the behavior.
+    async update($, [cameraSource], outputs) {
+        const video = document.createElement('video');
+        video.setAttribute('width', 640);
+        video.setAttribute('height', 480);
+        
+        const stream = await navigator.mediaDevices.getUserMedia(
+            {
+                
+                'audio': false,
+                'video': {
+                    facingMode: 'user',
+                    'width': 640,
+                    'height': 480
+                    
+                }
+            }
+        );
+        video.srcObject = stream;
+        video.play();
+
+        async function next(){
+            const model = handPoseDetection.SupportedModels.MediaPipeHands;
+            const detectorConfig = {
+                runtime: 'mediapipe', // or 'tfjs',
+                solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/hands',
+                modelType: 'full'
+            }
+            const detector = await handPoseDetection.createDetector(model, detectorConfig);
+    
+            async function update(){
+                const hands = await detector.estimateHands(video);
+                setHands(hands);
+                requestAnimationFrame(update);
+            }
+            update();  
+        }
+
+        //needed to prevent a crash at the init. Sure there's a better way ;-)
+        setTimeout(next, 2000);
     }
 }
 
