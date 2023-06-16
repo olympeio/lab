@@ -1,5 +1,5 @@
 {
-  "name": "@olympeio-extensions/rabbitmq",
+  "name": "@olympeio-extensions/lab",
   "main": "src/main.js",
   "version": "2.4.2-dev",
   "scripts": {
@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@olympeio/core": "2.4.1",
+    "@olympeio/commons": "2.4.1",
     "@olympeio/runtime-web": "9.4.2",
     "@olympeio/runtime-node": "9.4.2",
     "@tensorflow-models/hand-pose-detection": "2.0.0",
