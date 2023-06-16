@@ -3,7 +3,7 @@
         "host": "community.fluidapp.io"
     },
     "bus": {
-        "host": "rqbbitma.eks-prod.olympe.io"
+        "host": "rabbitmq.eks-prod.olympe.io"
     },
     "composer": {
         "sso": "manual"
