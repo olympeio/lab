@@ -9,11 +9,14 @@
     "test": "karma start",
     "serve:draw": "npx webpack serve --config-name draw",
     "serve:node": "cd dist/node && node main.js",
+    "build:nodeai": "npx webpack build --config webpack.config.js --config-name nodeai",
+    "serve:nodeai": "npm run build:nodeai; cd dist/node; node main.js",
     "serve": "npm run serve:draw"
   },
   "devDependencies": {
     "@olympeio/dev-tools": "2.4.0",
     "@olympeio/draw": "2.4.3",
+    "@olympeio-extensions/commons": "2.4.1",
     "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "11.0.0",
     "generate-json-webpack-plugin": "2.0.0",
