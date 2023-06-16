@@ -11,6 +11,7 @@
     "serve:node": "cd dist/node && node main.js",
     "build:nodeai": "npx webpack build --config webpack.config.js --config-name nodeai",
     "serve:nodeai": "npm run build:nodeai; cd dist/node; node main.js",
+    "debug:nodeai": "npm run build:nodeai; cd dist/node; node --inspect-brk main.js",
     "serve": "npm run serve:draw"
   },
   "devDependencies": {
