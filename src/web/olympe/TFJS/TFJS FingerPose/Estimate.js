@@ -1,38 +1,33 @@
 import { Brick, registerBrick, Query } from 'olympe';
-import Hand from './Hand.js';
-import * as fp from 'fingerpose';
+import { GestureDescription, GestureEstimator } from 'fingerpose';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
+import Gesture from "./Gesture";
 
 export default class Estimate extends Brick {
 
+    /**
+     * @override
+     */
     setupExecution($) {
         const validGestures = new Map();
-        const handGestures = Query.instancesOf(Hand).executeFromCache().map((hand) => {
-            validGestures.set(hand.getName(), hand);
-            const handGesture = new fp.GestureDescription(hand.getName());
-            
-            handGesture.addCurl(fp.Finger.Thumb,hand.getThumb().getCurl())
-            handGesture.addDirection(fp.Finger.Thumb,hand.getThumb().getDirection())
-
-            handGesture.addCurl(fp.Finger.Index,hand.getIndex().getCurl())
-            handGesture.addDirection(fp.Finger.Index,hand.getIndex().getDirection())
-
-            handGesture.addCurl(fp.Finger.Middle,hand.getMiddle().getCurl())
-            handGesture.addDirection(fp.Finger.Middle,hand.getMiddle().getDirection())
-
-            handGesture.addCurl(fp.Finger.Ring,hand.getRing().getCurl())
-            handGesture.addDirection(fp.Finger.Ring,hand.getRing().getDirection())
-
-            handGesture.addCurl(fp.Finger.Pinky,hand.getPinky().getCurl())
-            handGesture.addDirection(fp.Finger.Pkny,hand.getPinky().getDirection())
+        const handGestures = Query.instancesOf(Gesture).executeFromCache().map((gesture) => {
+            validGestures.set(gesture.getName(), gesture);
+            const handGesture = new GestureDescription(gesture.getName());
+            gesture.getCurls().forEach((curl) => {
+                handGesture.addCurl(Number.parseInt(curl.getFinger()), curl.getCurlValue());
+            });
+            gesture.getDirections().forEach((direction) => {
+                handGesture.addDirection(Number.parseInt(direction.getFinger()), direction.getDirectionModelValue());
+            });
             return handGesture;
         });
-        const GE = new fp.GestureEstimator(handGestures);
+
+        const estimator = new GestureEstimator(handGestures);
         const [predictionInput, scoreInput] = this.getInputs();
 
         return combineLatest([$.observe(predictionInput), $.observe(scoreInput)]).pipe(map((values) => {
-            return values.concat([GE, validGestures]);
+            return values.concat([estimator, validGestures]);
         }));
     }
 
@@ -42,30 +37,25 @@ export default class Estimate extends Brick {
      * @param {!BrickContext} $
      * @param {*} predictions
      * @param {number} score
+     * @param {!Object} estimator
+     * @param {!Map<string, Gesture>} validGestures
      * @param {function(*)} setGestureLeft
      * @param {function(*)} setGestureRight
      * @param {function(*)} setPoseData
      */
-    update($, [predictions, score, GE, validGestures], [setGestureLeft, setGestureRight, setPoseData]) {
+    update($, [predictions, score, estimator, validGestures], [setGestureLeft, setGestureRight, setPoseData]) {
         const leftPrediction = predictions.find((prediction) => prediction.handedness === "Left")
         const rightPrediction = predictions.find((prediction) => prediction.handedness === "Right")
 
-        if (leftPrediction){
-            const estimatedGestures = GE.estimate(leftPrediction.keypoints3D.map(({x, y, z}) => [x,y,z]), score);
+        const leftEstimatedGestures = leftPrediction
+            ? estimator.estimate(leftPrediction.keypoints3D.map(({x, y, z}) => [x, y, z]), score)
+            : null;
+        setGestureLeft(validGestures.get(leftEstimatedGestures?.gestures[0]?.name ?? null));
 
-            setGestureLeft(validGestures.get(estimatedGestures.gestures[0]?.name ?? null));
-        }else{
-            setGestureLeft(null);
-        }
-
-        if (rightPrediction){
-            const estimatedGestures = GE.estimate(rightPrediction.keypoints3D.map(({x, y, z}) => [x,y,z]), score);
-            setGestureRight(validGestures.get(estimatedGestures.gestures[0]?.name ?? null));
-        }else{
-            setGestureRight(null);
-        }
-        
-        // Executed every time an input gets updated., override `setupExecution()` to change the behavior.
+        const rightEstimatedGestures = rightPrediction
+            ? estimator.estimate(rightPrediction.keypoints3D.map(({x, y, z}) => [x, y, z]), score)
+            : null;
+        setGestureRight(validGestures.get(rightEstimatedGestures?.gestures[0]?.name ?? null));
     }
 }
 
