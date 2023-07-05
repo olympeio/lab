@@ -2,11 +2,6 @@ node_modules/
 .DS_Store
 .idea/
 .npm/
-build/
 dist/
 .dc-init/
-build.out/
-build.cache/
-build.out_non-tech/
 package-lock.json
-oConfigNode-local.json
