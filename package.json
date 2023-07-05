@@ -33,14 +33,14 @@
     "@olympeio-extensions/commons": "2.4.1",
     "@mediapipe/holistic": "~0.5.1675471629",
     "@tensorflow-models/hand-pose-detection": "~2.0.0",
-    "@tensorflow/tfjs": "~3.9.0",
-    "@tensorflow/tfjs-backend-webgl": "~3.9.0",
-    "@tensorflow/tfjs-core": "~3.9.0",
+    "@tensorflow/tfjs": "^3.9.0",
+    "@tensorflow/tfjs-backend-webgl": "^3.9.0",
+    "@tensorflow/tfjs-core": "^3.9.0",
     "d3": "7.4.2",
-    "fingerpose": "~0.1.0",
+    "fingerpose": "^0.1.0",
     "mathjs": "11.5.1",
-    "openai": "~3.3.0",
+    "openai": "^3.3.0",
     "three": "0.149.0",
-    "tone": "~14.7.77"
+    "tone": "^14.7.77"
   }
 }
