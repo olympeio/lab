@@ -1,0 +1,52 @@
+import { ActionBrick, registerBrick, ErrorFlow } from 'olympe';
+import { EventSourcePolyfill } from 'event-source-polyfill';
+// import EventSource from 'eventsource';
+
+export default class CodedSSE extends ActionBrick {
+ 
+    /**
+     * @override
+     * @protected
+     * @param {!BrickContext} $
+     * @param {string} url
+     * @param {string} headers
+     * @param {string} listenerTypes
+     * @param {function()} forwardEvent
+     * @param {function(string)} setBody
+     * @param {function(*)} setErrorFlow
+     */
+    update($, [url, headers, listenerTypes], [forwardEvent, setBody, setErrorFlow]) {
+        // Write your code here. You have to implement this method !
+        // Executed every time the brick receives a new trigger event, override `setupExecution()` to change the behavior.
+
+        const eventSource = new EventSourcePolyfill(url, {
+            headers: JSON.parse(headers)
+        }); 
+ 
+        eventSource.onmessage = (event) => { 
+            setBody(event)
+            forwardEvent()
+        };
+
+        eventSource.onerror = (event) => {
+            setErrorFlow(ErrorFlow.create(event))
+        };
+
+        eventSource.onopen = (event) => {
+            setBody(event)
+            forwardEvent()
+        }; 
+        
+        const typeArray = listenerTypes.split(",")
+         
+        typeArray.forEach( t => { 
+                eventSource.addEventListener(t, (event) => {
+                    setBody(event)
+                    forwardEvent()
+                })
+            }
+        )
+    }
+}
+
+registerBrick('018820f934c7c74e4b73', CodedSSE);
