@@ -1,14 +1,14 @@
 {
   "name": "@olympeio-extensions/lab",
   "main": "src/main.js",
-  "version": "2.4.4-dev",
+  "version": "2.5.0-dev",
   "scripts": {
     "prebuild": "npx gulp patches --core.modules=project",
     "build": "npx webpack build",
     "postbuild": "npx gulp clean"
   },
   "devDependencies": {
-    "@olympeio/dev-tools": "2.4.0",
+    "@olympeio/dev-tools": "2.5.0",
     "@babel/preset-env": "7.22.2",
     "@babel/preset-react": "7.22.0",
     "babel-loader": "9.1.2",
@@ -26,10 +26,10 @@
     "typescript": "5.1.6"
   },
   "dependencies": {
-    "@olympeio/runtime-node": "~9.4.5",
-    "@olympeio/runtime-web": "~9.4.5",
-    "@olympeio/core": "2.4.4",
-    "@olympeio-extensions/commons": "2.4.4",
+    "@olympeio/runtime-node": "~9.5.0",
+    "@olympeio/runtime-web": "~9.5.0",
+    "@olympeio/core": "2.5.0",
+    "@olympeio-extensions/commons": "2.5.0",
     "@mediapipe/holistic": "~0.5.1675471629",
     "@tensorflow-models/hand-pose-detection": "~2.0.1",
     "@tensorflow/tfjs": "~4.10.0",
