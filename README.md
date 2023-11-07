@@ -5,8 +5,9 @@ This project is made for the Olympe community to be able to create coded bricks 
 ### How to participate
 
 1. First register to the community following the instructions on the [support website](https://olympe.support/#getting-started).
-2. Code your bricks and test them [locally](https://olympe.support/local_install). 
-3. Create a pull request with your code:
+2. Code your bricks and test them [locally](https://olympe.support/local_install).
+3. Send a message on [discord](https://discord.gg/czqv9vFTBA) to join the "Olympe Community" team on Github to become a contributor of this project.
+4. Create a pull request with your code:
    1. clone this repository
    2. create a branch based on the `develop` branch. Name it like this: `<community username>-<bricks set name>`
    3. create a pull request of your branch to the develop branch. Ensure that you respect the structure specified in the [rules](#Rules).
