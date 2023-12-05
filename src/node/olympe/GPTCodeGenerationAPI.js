@@ -21,7 +21,9 @@ export default class GPTCodeGenerationAPI extends ActionBrick {
             apiKey: Config.getParameter('openai.apiKey')
         });
         const openai = new OpenAIApi(configuration);
-        const model = 'text-davinci-003';
+        // this is legacy completion https://platform.openai.com/docs/guides/text-generation/completions-api
+        // chat endpoint can be used as well with a different payload
+        const model = 'gpt-3.5-turbo-instruct';
         const prompt = this.createPrompt(shortDescription, longDescription, inputs, outputs);
         const answer = await openai.createCompletion({
             model: model,
