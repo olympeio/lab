@@ -30,8 +30,10 @@ export default class GPTCompletion extends ActionBrick {
             return;
         }
         let aiModel = model;
+        // for completion https://platform.openai.com/docs/guides/text-generation/completions-api
+        // the "chatting" model can be used for single instructions as well, which has not history except the current prompt
         if (model === 'default') {
-            aiModel = chatting ? 'gpt-3.5-turbo' : 'text-davinci-003';
+            aiModel = chatting ? 'gpt-3.5-turbo' : 'gpt-3.5-turbo-instruct';
         }
         const configuration = new Configuration({
             organization: Config.getParameter('openai.organization'),
