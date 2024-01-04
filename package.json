@@ -26,10 +26,10 @@
     "typescript": "5.1.6"
   },
   "dependencies": {
-    "@olympeio/runtime-node": "~9.5.0",
-    "@olympeio/runtime-web": "~9.5.0",
-    "@olympeio/core": "2.5.0",
-    "@olympeio-extensions/commons": "2.5.0",
+    "@olympeio/runtime-node": "~9.5.2",
+    "@olympeio/runtime-web": "~9.5.2",
+    "@olympeio/core": "2.5.1",
+    "@olympeio-extensions/commons": "2.5.1",
     "@mediapipe/holistic": "~0.5.1675471629",
     "@tensorflow-models/hand-pose-detection": "~2.0.1",
     "@tensorflow/tfjs": "~4.10.0",
