@@ -49,13 +49,12 @@ module.exports = {
                 main: 'main-node.js',
                 browser: 'main-web.js',
                 dependencies: npmPackage.dependencies,
-                dcInitConfig: 'import/dcInitConfig.json',
+                codeAsData: 'codeAsData',
                 homepage: 'https://github.com/olympeio/lab',
             }
         ),
         new Copy({
             patterns: [
-                {from: '.dc-init', to: 'import', globOptions: {ignore: ['**/id_rsa']}},
                 {from: 'README.md', to: 'README.md'}
             ]
         }),

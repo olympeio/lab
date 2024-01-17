@@ -3,12 +3,11 @@
   "main": "src/main.js",
   "version": "2.5.0-dev",
   "scripts": {
-    "prebuild": "npx gulp patches --core.modules=project",
-    "build": "npx webpack build",
-    "postbuild": "npx gulp clean"
+    "postbuild": "npx olympe buildCodeAsData -pmd project",
+    "build": "npx webpack build"
   },
   "devDependencies": {
-    "@olympeio/dev-tools": "2.5.0",
+    "@olympeio/olympe-toolkit": "1.0.4-dev",
     "@babel/preset-env": "7.22.2",
     "@babel/preset-react": "7.22.0",
     "babel-loader": "9.1.2",
